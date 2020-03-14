@@ -24,7 +24,7 @@ def run_sacad_r(path):
 
     if stdout:
       LOGGER.info(stdout.decode(sys.stdout.encoding))
-    if stderr:
+    if stderr and SACAD_R_NOT_ALLOWED_STDERR_CONTENT(stderr):
       LOGGER.error(stderr.decode(sys.stderr.encoding))
 
     if result.returncode == 0:
