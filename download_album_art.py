@@ -19,13 +19,13 @@ def run_sacad_r(path):
 
     LOGGER.info(result.args)
 
-    stdout = result.stdout
-    stderr = result.stderr
+    stdout = result.stdout.decode(sys.stdout.encoding)
+    stderr = result.stderr.decode(sys.stderr.encoding)
 
     if stdout:
-      LOGGER.info(stdout.decode(sys.stdout.encoding))
+      LOGGER.info(stdout)
     if stderr and SACAD_R_NOT_ALLOWED_STDERR_CONTENT(stderr):
-      LOGGER.error(stderr.decode(sys.stderr.encoding))
+      LOGGER.error(stderr)
 
     if result.returncode == 0:
       LOGGER.info(f"Executing sacad_r for path {path} finished successfully")
