@@ -8,11 +8,13 @@ SACAD_R_PRE_MUSIC_FOLDER_ARGUMENTS = ["--size-tolerance", "33", "--amazon-sites"
 SACAD_R_POST_MUSIC_FOLDER_ARGUMENTS = ["1500", "Folder.jpg"]
 
 def SACAD_R_NOT_ALLOWED_STDERR_CONTENT(content):
-  if "Analyzing library" in content:
+  content = content.lower()
+
+  if "analyzing library" in content:
     return "errors=0" not in content
-  elif "Searching covers" in content:
-    return "errors=0" not in content and "no result found=0" not in content
-  return True
+  elif "searching covers" in content:
+    return "errors=0" not in content or "no result found=0" not in content
+  return "error" in content
 
 ALLOWED_MUSIC_FILE_EXTENSIONS = [".flac"]
 ALLOWED_IMAGE_FILE_EXTENSIONS = [".jpg", ".jpeg", ".png"]
